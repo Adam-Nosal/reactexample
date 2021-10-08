@@ -1,23 +1,28 @@
-import React from "react";
-import logo from "./logo.svg";
+import { useState } from "react";
 import "./App.css";
-import Media, { MediaVideo } from "./Media";
+import Media from "./Media";
+import useFetch from "use-http";
+ import Button from "react-bootstrap/Button"
+import Header from "./Components/Header";
+import UserList from "./Components/UserList";
 
 function App() {
+  let uri = "https://picsum.photos/id/0/info";
+
+  const options = {};
+  const { loading, error, data = [] } = useFetch(uri, options, []);
+
+  const [message, setmessage] = useState("Joł");
+
+  const displayMessage = () => {
+    alert(message);
+  };
+
+
   return (
     <div className="App">
-      <p>Hello !</p>
-      <h1>wtf</h1>
-      <div>
-        <p>div2</p>
-      </div>
-      <div>
-        <a href="https://wp.pl">wp</a>
-      </div>
-      <Media />
-      <div>
-        <MediaVideo/>
-      </div>
+     <Header/>
+      <UserList/>
     </div>
   );
 }
